@@ -126,7 +126,7 @@ footer {
 
 #login_form {
     text-align: center;
-    margin: 0 auto 70px;
+    margin: 0 auto 15px;
 }
 
 #login_form input[type="text"],
@@ -293,4 +293,66 @@ form button,
     justify-content: center;
     gap: 12px;
     margin-top: 20px;
+}
+
+
+/* for login */
+
+#message_box {
+    width: 100%;
+    max-width: 260px;
+    min-height: 20px;
+    margin-top: 0;
+    margin-bottom: 10px;
+    padding: 10px 12px;
+    border-radius: 12px;
+    text-align: center;
+    font-weight: bold;
+    box-sizing: border-box;
+}
+
+.success {
+    background-color: #dff6dd;
+    color: #1f6b2a;
+    border: 2px solid #9ad29a;
+}
+
+.error {
+    background-color: #ffe0e0;
+    color: #a33a3a;
+    border: 2px solid #e7a1a1;
+}
+
+.signup_text {
+    margin: 0;
+    text-align: center;
+}
+
+.signup_link {
+    display: inline-block;
+    text-decoration: none;
+    background-color: #f28c8c;
+    color: #ffffff;
+    font-weight: bold;
+    border-radius: 12px;
+    padding: 8px 14px;
+    margin-left: 4px;
+}
+
+/* for signup */
+
+#signup_btn{
+    background-color:#4CAF50;
+    padding:10px;
+    border-radius:5px;
+    margin:10px;
+    opacity:0.5;
+    color:white;
+    border:none;
+    cursor:pointer;
+}
+
+#signup_btn:hover{
+    background-color:#45A049;
+    opacity:1.0;
 }

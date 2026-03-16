@@ -311,13 +311,13 @@ form button,
     box-sizing: border-box;
 }
 
-.success_message {
+.success {
     background-color: #dff6dd;
     color: #1f6b2a;
     border: 2px solid #9ad29a;
 }
 
-.error_message {
+.error {
     background-color: #ffe0e0;
     color: #a33a3a;
     border: 2px solid #e7a1a1;
@@ -340,3 +340,19 @@ form button,
 }
 
 /* for signup */
+
+#signup_btn{
+    background-color:#4CAF50;
+    padding:10px;
+    border-radius:5px;
+    margin:10px;
+    opacity:0.5;
+    color:white;
+    border:none;
+    cursor:pointer;
+}
+
+#signup_btn:hover{
+    background-color:#45A049;
+    opacity:1.0;
+}

@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <title>Signup</title>
+</head>
+
+<body>
+    <header id="page_header">
+        <div>
+            <div><img src="img/logo.jpeg" alt="Sweet Scoop Ice Cream Logo"></div>
+        </div>
+
+        <div>
+            <h3>Sweet Scoop Ice Cream</h3>
+        </div>
+    </header>
+
+    <nav>
+        <ul>
+            <li><a href="index.html">Home</a></li>
+        </ul>
+    </nav>
+
+    <main class="login_main">
+        <div id="login_container">
+            <h2>Create Account</h2>
+            <p>Fill in the form to create an account.</p>
+
+            <form id="signup_form">
+                <label for="username">Username</label><br>
+                <input type="text" id="username" required><br><br>
+
+                <label for="password">Password</label><br>
+                <input type="password" id="password" required><br><br>
+
+                <label for="confirm_password">Confirm Password</label><br>
+                <input type="password" id="confirm_password" required><br><br>
+
+                <label for="email">Email</label><br>
+                <input type="text" id="email" required><br><br>
+
+                <button id="signup_btn" type="submit">Signup</button>
+            </form>
+
+            <div id="message_box"></div>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 Sweet Scoop Ice Cream.</p>
+    </footer>
+
+    <script>
+        const form = document.getElementById("signup_form");
+        const messageBox = document.getElementById("message_box");
+
+        function showMessage(message, type) {
+            messageBox.textContent = message;
+            messageBox.className = "message_box " + type;
+            messageBox.style.display = "block";
+        }
+
+        form.addEventListener("submit", function(e){
+            e.preventDefault();
+
+            let username = document.getElementById("username").value;
+            let password = document.getElementById("password").value;
+            let confirmPassword = document.getElementById("confirm_password").value;
+            let email = document.getElementById("email").value;
+
+            messageBox.className = "";
+            messageBox.textContent = "";
+
+
+            const usernameRegex = /^[A-Za-z][A-Za-z0-9_-]{2,19}$/;
+
+            if(!usernameRegex.test(username)){
+                showMessage("Username must be 3-20 characters, start with a letter, and contain only letters, numbers, - or _.", "error");
+                return;
+            }
+
+
+            const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*()_\-+=\[\]{};:'",.<>\/?~])[A-Za-z0-9!@#$%^&*()_\-+=\[\]{};:'",.<>\/?~]{8,}$/;
+
+            if(!passwordRegex.test(password)){
+                showMessage("Password must be at least 8 characters and include uppercase, lowercase, number, and special character.", "error");
+                return;
+            }
+
+            if(password !== confirmPassword){
+                showMessage("Passwords do not match.", "error");
+                return;
+            }
+
+
+            const emailRegex = /^[^\s@]+@[^\s@]+\.(com|net|io)$/;
+
+            if(!emailRegex.test(email)){
+                showMessage("Email must contain @ and end with .com, .net, or .io.", "error");
+                return;
+            }
+
+
+            showMessage("Signup successful.", "success");
+
+            setTimeout(function(){
+                window.location.href = "login.html";
+            },2000);
+
+        });
+    </script>
+</body>
+</html>

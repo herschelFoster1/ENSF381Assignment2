@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -29,13 +28,14 @@
         <div id="login_container">
             <h2>Welcome Back!</h2>
             <p>Please enter your username to log in.</p>
-            <form id="login_form" action="menu_view.html">
+
+            <form id="login_form">
                 <label for="username">Username:</label><br>
                 <input type="text" id="username" name="username" required><br><br>
 
-                <label for="password">Password:</label><br>
+                <label for="password">Password (Email):</label><br>
                 <input type="password" id="password" name="password" required><br><br>
-                
+
                 <div>
                     <input type="checkbox" id="forgot_password" name="forgot_password" disabled>
                     <label for="forgot_password">Forgot Password?</label><br><br>
@@ -43,12 +43,75 @@
 
                 <button type="submit">Login</button>
             </form>
+
+            <div id="message_box"></div>
+
+            <p class="signup_text">
+                New user?
+                <a href="signup.html" class="signup_link">Create an account</a>
+            </p>
         </div>
     </main>
 
     <footer>
         <p>&copy; 2026 Sweet Scoop Ice Cream.</p>
     </footer>
-</body>
 
+    <script>
+        const loginForm = document.getElementById("login_form");
+        const usernameInput = document.getElementById("username");
+        const passwordInput = document.getElementById("password");
+        const messageBox = document.getElementById("message_box");
+
+        function showMessage(message, type) {
+            messageBox.textContent = message;
+            messageBox.className = "message_box " + type;
+            messageBox.style.display = "block";
+        }
+
+        loginForm.addEventListener("submit", async function (event) {
+            event.preventDefault();
+
+            const enteredUsername = usernameInput.value.trim();
+            const enteredPassword = passwordInput.value;
+
+            messageBox.style.display = "none";
+            messageBox.textContent = "";
+            messageBox.className = "";
+
+            try {
+                const response = await fetch("https://jsonplaceholder.typicode.com/users");
+
+                if (!response.ok) {
+                    throw new Error("Unable to fetch user data.");
+                }
+
+                const users = await response.json();
+
+                const matchedUser = users.find(user =>
+                    user.username.toLowerCase() === enteredUsername.toLowerCase()
+                );
+
+                if (!matchedUser) {
+                    showMessage("Error: Username not found.", "error");
+                    return;
+                }
+
+                if (enteredPassword !== matchedUser.email) {
+                    showMessage("Error: Password does not match the user's email.", "error");
+                    return;
+                }
+
+                showMessage("Login successful! Redirecting to menu...", "success");
+
+                setTimeout(() => {
+                    window.location.href = "menu_view.html";
+                }, 2000);
+
+            } catch (error) {
+                showMessage("Error: Could not validate login. Please try again later.", "error");
+            }
+        });
+    </script>
+</body>
 </html>
